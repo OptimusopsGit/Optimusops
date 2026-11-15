@@ -17,14 +17,14 @@ import optimusLogoFooter from '@assets/optimus-logo-footer.png';
 
 const queryClient = new QueryClient();
 const CONTACT_EMAIL = 'sales@optimusqc.com';
-const CONTACT_PHONE = '+1 (248) 560-7122';
-const CONTACT_PHONE_HREF = 'tel:+12485607122';
-const WEBSITE_LABEL = 'www.optimusops.com';
-const WEBSITE_URL = 'https://www.optimusops.com';
-const OFFICE_LOCATION = 'Saginaw, Michigan, USA';
-const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=Saginaw%2C+Michigan';
-// TODO: replace with the Optimus company profile URLs.
-const LINKEDIN_URL = 'https://www.linkedin.com/';
+const CONTACT_PHONE = '+1 (989) 372-0023';
+const CONTACT_PHONE_HREF = 'tel:+19893720023';
+const WEBSITE_LABEL = 'www.optimusqc.com';
+const WEBSITE_URL = 'https://www.optimusqc.com';
+const OFFICE_LOCATION = '3965 Fortune Blvd, Saginaw, MI 48603';
+const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=3965+Fortune+Blvd%2C+Saginaw%2C+MI+48603';
+const LINKEDIN_URL = 'https://www.linkedin.com/company/17884608/';
+// TODO: replace with the Optimus X profile URL.
 const X_URL = 'https://x.com/';
 
 function LinkedInLogo({ size = 18 }: { size?: number }) {
