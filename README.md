@@ -30,5 +30,6 @@ Push this folder as the root of a Git repo, then import it:
 
 ## Launch checklist
 
-- Replace `CONTACT_EMAIL`, `CONTACT_PHONE`, `LINKEDIN_URL`, `X_URL` placeholders in `src/App.tsx`.
-- Replace `YOUR_DOMAIN` in `public/robots.txt` and `public/sitemap.xml`.
+- Contact details and social links are set as constants near the top of `src/App.tsx`.
+- Set `VITE_WEB3FORMS_KEY` in the hosting provider's environment variables so the contact form can send.
+- `public/robots.txt` and `public/sitemap.xml` point to `https://www.optimusqc.com`; update them if the domain changes.

@@ -23,9 +23,8 @@ const WEBSITE_LABEL = 'www.optimusqc.com';
 const WEBSITE_URL = 'https://www.optimusqc.com';
 const OFFICE_LOCATION = '3965 Fortune Blvd, Saginaw, MI 48603';
 const MAPS_URL = 'https://www.google.com/maps/search/?api=1&query=3965+Fortune+Blvd%2C+Saginaw%2C+MI+48603';
-const LINKEDIN_URL = 'https://www.linkedin.com/company/17884608/';
-// TODO: replace with the Optimus X profile URL.
-const X_URL = 'https://x.com/';
+const LINKEDIN_URL = 'https://www.linkedin.com/company/optimus-ops/';
+const X_URL = 'https://x.com/OptimusOpsLLC';
 
 function LinkedInLogo({ size = 18 }: { size?: number }) {
   return <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.23 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0h.01Z"/></svg>;
@@ -384,7 +383,7 @@ function validateEmail(value: string) {
 function validatePhone(value: string) {
   const trimmed = value.trim();
   if (!trimmed) return '';
-  const invalid = 'Please enter a valid phone number, e.g. (248) 560-7122 or +1 248 560 7122.';
+  const invalid = 'Please enter a valid phone number, e.g. (555) 123-4567 or +1 555 123 4567.';
   if (!/^\+?[\d\s().-]+$/.test(trimmed) || trimmed.indexOf('+') > 0) return invalid;
   const digits = trimmed.replace(/\D/g, '');
   if (trimmed.startsWith('+')) return digits.length >= 8 && digits.length <= 15 ? '' : invalid;
@@ -475,7 +474,7 @@ function ContactForm({ initialService = '' }: { initialService?: string }) {
     <div className="form-stack">
       <div className={fieldClass('name')}><label htmlFor="fullName">Full Name</label><input id="fullName" name="name" autoComplete="name" maxLength={100} placeholder="Enter your name" value={values.name} onChange={(e) => update('name', e.target.value)} onBlur={() => markTouched('name')} {...a11y('name', 'fullName-error')} data-testid="input-full-name" />{errorText('name', 'fullName-error')}</div>
       <div className={fieldClass('email')}><label htmlFor="workEmail">Email Address</label><input id="workEmail" name="email" type="email" inputMode="email" autoComplete="email" maxLength={254} placeholder="Enter your email" value={values.email} onChange={(e) => update('email', e.target.value)} onBlur={() => markTouched('email')} {...a11y('email', 'workEmail-error')} data-testid="input-work-email" />{errorText('email', 'workEmail-error')}</div>
-      <div className={fieldClass('phone')}><label htmlFor="phone">Phone Number <span className="optional-label">(optional)</span></label><input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={20} placeholder="e.g. (248) 560-7122" value={values.phone} onChange={(e) => update('phone', e.target.value.replace(PHONE_ALLOWED, ''))} onBlur={() => markTouched('phone')} {...a11y('phone', 'phone-error')} data-testid="input-phone" />{errorText('phone', 'phone-error')}</div>
+      <div className={fieldClass('phone')}><label htmlFor="phone">Phone Number <span className="optional-label">(optional)</span></label><input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" maxLength={20} placeholder="e.g. (555) 123-4567" value={values.phone} onChange={(e) => update('phone', e.target.value.replace(PHONE_ALLOWED, ''))} onBlur={() => markTouched('phone')} {...a11y('phone', 'phone-error')} data-testid="input-phone" />{errorText('phone', 'phone-error')}</div>
       <div className="form-field"><label htmlFor="service">Area of Interest</label><select id="service" name="service" value={values.service} onChange={(e) => update('service', e.target.value)} data-testid="select-service"><option value="">Select a service area</option>{services.map(s=><option value={s.title} key={s.title}>{s.title}</option>)}<option value="Other">Other</option></select></div>
       <div className={fieldClass('message')}><label htmlFor="message">Message</label><textarea id="message" name="message" maxLength={3000} placeholder="Tell us about your project goals..." value={values.message} onChange={(e) => update('message', e.target.value)} onBlur={() => markTouched('message')} {...a11y('message', 'message-error')} data-testid="input-message" />{errorText('message', 'message-error')}</div>
       <div className="botcheck" aria-hidden="true"><label htmlFor="botcheck">Leave this box unchecked</label><input id="botcheck" name="botcheck" type="checkbox" value="true" tabIndex={-1} autoComplete="off" data-testid="input-botcheck" /></div>
