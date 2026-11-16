@@ -457,3 +457,14 @@ h1, h2, h3, h4, .font-heading, .nav-link, .btn, .trust-item, .fit-point h4,
 .contact-form .btn-primary:disabled, .contact-form .btn-primary:disabled:hover { cursor: not-allowed; opacity: .45; box-shadow: none; background-position: 0% 0; }
 .contact-form .btn-primary:disabled svg { transform: none; }
 .form-hint { margin: 10px 0 0; color: #6a798a; font-size: 12.5px; text-align: center; }
+
+/* Careers */
+.job-list { display: grid; gap: 14px; margin-top: 34px; }
+.job-card { display: flex; gap: 24px; align-items: center; justify-content: space-between; padding: 24px 28px; border: 1px solid #d6e3ea; border-left: 3px solid #1597b8; border-radius: 12px; background: #fff; }
+.job-card h3 { font: 650 17px 'Montserrat', sans-serif; color: #031643; margin: 0 0 6px; }
+.job-card p { color: #617083; font-size: 14px; line-height: 1.7; margin: 0; }
+.job-meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 12px; color: #4f6273; font-size: 13px; }
+.job-meta span { display: inline-flex; align-items: center; gap: 6px; }
+@media (max-width: 700px) {
+  .job-card { flex-direction: column; align-items: flex-start; padding: 22px 20px; }
+}

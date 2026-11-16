@@ -8,7 +8,7 @@ import OptimusRingNetwork from '@/components/optimus-ring-network';
 import SignalToDecision from '@/components/signal-to-decision';
 import { Link, Route, Switch, useLocation, Router as WouterRouter } from 'wouter';
 import {
-  Activity, ArrowRight, Check, ChevronRight, CircleHelp,
+  Activity, ArrowRight, Check, Clock, ChevronRight, CircleHelp,
   Cloud, Cpu, Gauge, Globe, Layers3, LockKeyhole, MapPin, Menu, Network, Radio,
   Mail, Phone, ShieldCheck, Truck, Users, X,
 } from 'lucide-react';
@@ -58,6 +58,7 @@ const pageMeta: Record<string, { title: string; description: string }> = {
   '/services': { title: 'Services | Optimus', description: 'Explore Optimus services for fleet management, connected devices, industrial monitoring, analytics, tracking, CRM, and software.' },
   '/solutions': { title: 'Solutions | Optimus', description: 'Connect equipment, surface operational signals, and give teams a clear way to act across sites with Optimus.' },
   '/about': { title: 'About | Optimus', description: 'Meet the Optimus team: multidisciplinary engineers, designers, and innovators building secure connected systems.' },
+  '/careers': { title: 'Careers | Optimus', description: 'Explore career opportunities at Optimus in Saginaw, Michigan, building software, IoT, and AI solutions for real-world operations.' },
   '/contact': { title: 'Contact | Optimus', description: 'Tell Optimus about your fleet, equipment, or software challenge. Our Saginaw, Michigan team will be in touch.' },
   '/privacy': { title: 'Privacy Policy | Optimus', description: 'Learn how Optimus uses information submitted through its website contact form.' },
 };
@@ -149,7 +150,7 @@ function Header() {
     window.addEventListener('scroll', updateScrollState, { passive: true });
     return () => window.removeEventListener('scroll', updateScrollState);
   }, []);
-  const links = [['Home', '/'], ['Services', '/services'], ['Solutions', '/solutions'], ['About', '/about'], ['Contact', '/contact']];
+  const links = [['Home', '/'], ['Services', '/services'], ['Solutions', '/solutions'], ['About', '/about'], ['Careers', '/careers'], ['Contact', '/contact']];
   return <header className={`topbar ${scrolled ? 'is-scrolled' : ''}`}>
     <div className="container-wide nav-inner">
       <Link href="/" className="nav-logo" aria-label="Optimus home" data-testid="link-logo-home">
@@ -177,7 +178,7 @@ function Footer() {
           <p className="footer-editable">{OFFICE_LOCATION}</p>
         </div>
         <div><h3>Explore</h3><div className="footer-links">
-          <Link href="/services" data-testid="link-footer-services">Services</Link><Link href="/solutions" data-testid="link-footer-solutions">Solutions</Link><Link href="/about" data-testid="link-footer-about">About Optimus</Link><Link href="/contact" data-testid="link-footer-contact">Contact</Link>
+          <Link href="/services" data-testid="link-footer-services">Services</Link><Link href="/solutions" data-testid="link-footer-solutions">Solutions</Link><Link href="/about" data-testid="link-footer-about">About Optimus</Link><Link href="/careers" data-testid="link-footer-careers">Careers</Link><Link href="/contact" data-testid="link-footer-contact">Contact</Link>
         </div></div>
         <div><h3>Services</h3><div className="footer-links">
           {services.map((service, index) => <Link href="/services" key={service.title} data-testid={`link-footer-service-${index + 1}`}>{service.title}</Link>)}
@@ -535,6 +536,37 @@ function ContactPage() {
   </main></Layout>;
 }
 
+// Open roles shown on the Careers page. Leave the list empty when not hiring and the
+// page shows a "no open positions" message. To post a role, add an entry like:
+// { title: 'Software Engineer', location: 'Saginaw, MI', type: 'Full-time', summary: 'Build web and IoT platforms with our engineering team.' },
+type JobOpening = { title: string; location: string; type: string; summary: string };
+const openPositions: JobOpening[] = [];
+
+function careersMailto(subject: string) {
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}`;
+}
+
+function CareersPage() {
+  const hiring = openPositions.length > 0;
+  return <Layout><main>
+    <SubHero eyebrow="CAREERS" title="Build what keeps operations moving.">Join a team that brings quality, software, IoT, and AI together to solve real problems for the businesses we serve.</SubHero>
+    <section className="section-pad"><div className="container-wide">
+      <Reveal className="split-head"><div><div className="eyebrow">OPEN POSITIONS</div><h2 className="section-title">{hiring ? 'Current openings.' : 'No open positions right now.'}</h2></div><p className="section-copy">{hiring ? 'Find a role that fits your experience and send us your resume. We review every application.' : 'We are not hiring at the moment, but we are growing. Check back here for future openings.'}</p></Reveal>
+      {hiring
+        ? <Reveal className="job-list stagger">{openPositions.map((job) => <article className="job-card" key={job.title} data-testid="card-job">
+            <div className="job-main"><h3>{job.title}</h3><p>{job.summary}</p><div className="job-meta"><span><MapPin size={14} />{job.location}</span><span><Clock size={14} />{job.type}</span></div></div>
+            <a className="btn btn-primary" href={careersMailto(`Application: ${job.title}`)}>Apply <ArrowRight size={15} /></a>
+          </article>)}</Reveal>
+        : null}
+    </div></section>
+    <section className="capability-band section-pad"><div className="container-wide">
+      <Reveal><div className="eyebrow">WHY OPTIMUS</div><h2 className="section-title">Work that shows up in the real world.</h2></Reveal>
+      <Reveal><div className="values-grid">{[['Real impact','Your work runs on vehicles, machines, and sites that businesses depend on every day.'],['Broad experience','Work across quality, hardware, software, and data instead of one narrow slice.'],['Small team','Ideas move quickly, and everyone has a voice in how we build.'],['Room to grow','Take on new challenges as we expand into new services and industries.']].map(([title,copy])=><article className="value-item" key={title}><h3>{title}</h3><p>{copy}</p></article>)}</div></Reveal>
+    </div></section>
+    <section className="cta-band"><div className="container-wide cta-inner"><div><h2>Have a question about working at Optimus?</h2><p>Reach out and our team will get back to you.</p></div><Link href="/contact" className="btn btn-primary" data-testid="link-careers-contact">Contact us <ArrowRight size={16}/></Link></div></section>
+  </main></Layout>;
+}
+
 function PrivacyPage() {
   return <Layout><main>
     <SubHero eyebrow="PRIVACY" title="A clear approach to your information.">This policy describes how Optimus handles information submitted through this website.</SubHero>
@@ -564,6 +596,7 @@ function Router() {
       <Route path="/services" component={ServicesPage} />
       <Route path="/solutions" component={SolutionsPage} />
       <Route path="/about" component={AboutPage} />
+      <Route path="/careers" component={CareersPage} />
       <Route path="/contact" component={ContactPage} />
       <Route path="/privacy" component={PrivacyPage} />
       <Route component={BrandedNotFound} />
